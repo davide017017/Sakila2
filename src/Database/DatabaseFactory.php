@@ -1,8 +1,8 @@
 <?php
 
-namespace Utente\Sakila2 ;
+namespace Utente\Sakila2\Database ;
 
-use Utente\Sakila2\DatabaseContract;
+use Utente\Sakila2\Database\DatabaseContract;
 use Exception;
 use PDO;
 use PDOException;
@@ -10,7 +10,7 @@ use PDOException;
 class DatabaseFactory {
 
     // Metodo statico per creare una connessione al database
-    public static function create(\Utente\Sakila2\DBConfig $dbconfig, string $type = DatabaseContract::TYPE_PDO): ?DatabaseContract {
+    public static function create(\Utente\Sakila2\Database\DBConfig $dbconfig, string $type = DatabaseContract::TYPE_PDO): ?DatabaseContract {
         if ($type === DatabaseContract::TYPE_PDO) {
             // Crea una connessione PDO
             return self::CreateWithPDO($dbconfig);
@@ -19,8 +19,9 @@ class DatabaseFactory {
             throw new Exception("Tipo di database '{$type}' non supportato: {$type}");
         }
     }
+    
     // Metodo privato statico per creare una connessione PDO
-    private static function CreateWithPDO(\Utente\Sakila2\DBConfig $dbconfig){
+    private static function CreateWithPDO(\Utente\Sakila2\Database\DBConfig $dbconfig){
         try {
             // Crea una nuova istanza di MyPDO
             $pdo = new MyPDO($dbconfig);
@@ -30,7 +31,7 @@ class DatabaseFactory {
             return $pdo;
         } catch (PDOException $e) {
             // Lancia un'eccezione in caso di fallimento della connessione
-            throw new Exception("Connessione al database fallita:  {$e->getMessage()}");
+            throw $e;
         }
     }
 }

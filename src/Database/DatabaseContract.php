@@ -1,6 +1,6 @@
 <?php
 
-namespace Utente\Sakila2 ;
+namespace Utente\Sakila2\Database ;
 
 interface DatabaseContract {
 

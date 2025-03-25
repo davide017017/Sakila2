@@ -1,6 +1,6 @@
 <?php
 
-namespace Utente\Sakila2 ;
+namespace Utente\Sakila2\Database ;
 
 class DBConfig{
 
@@ -8,18 +8,20 @@ class DBConfig{
 
     public string $port;
 
-    public string $DBName;
+    public string $dbName;
 
     public string $user;
 
     public string $password;
 
-    public function __construct(string $host, string $port, string $DBName, string $user, string $password){
+    public function __construct(string $host, string $port, string $dbName, string $user, string $password){
 
         $this->host = $host;
         $this->port = $port;
-        $this->DBName = $DBName;
+        $this->dbName = $dbName;
         $this->user = $user;
         $this->password = $password;
     }
 }
+
+?>
