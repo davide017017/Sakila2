@@ -1,6 +1,6 @@
 body {
     font-family: sans-serif;
-    background-image: radial-gradient(circle, #667056, #e0e0e0);
+    background-color: #1e1e1e; /* Dark background */
     margin: 0;
     padding: 0;
     display: flex;
@@ -8,13 +8,14 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    color: #d4d4d4; /* Light text color */
 }
 
 main {
     margin-top: 10px;
     width: 90%;
     height: 90%;
-    border: 2px solid #796e5d;
+    border: 1px solid #424242; /* Darker border */
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -22,48 +23,36 @@ main {
     justify-content: center;
     box-sizing: border-box;
     padding: 20px;
-    background-image: linear-gradient(to bottom, #e0f7f0, #6c8378); /* Gradiente lineare azzurro */
-    background-color: #e0f2f7;
-    box-shadow: 0 30px 110px rgba(0, 0, 0, 0.8);
+    background-color: #252525; /* Slightly lighter dark background */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* Adjusted shadow for dark theme */
     text-align: center;
 }
 
 h1 {
-    color: rgb(14, 31, 21);
+    color: #d4d4d4; /* Light text color */
     text-align: center;
-}
-
-main h2 {
-    margin: auto;
-    text-align: center;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    padding: 5px 0; /* Spazio sopra e sotto il testo */
-    background: linear-gradient(to right, #266aa5, #107960);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block; /* Necessario per background-clip: text */ /* Un gradiente dal blu al verde */
 }
 
 h3 {
     margin: 0;
+    color: #d4d4d4; /* Light text color */
 }
 
 p {
     font-size: 1.1em;
     line-height: 1.5;
     text-align: center;
+    color: #d4d4d4; /* Light text color */
 }
 
 .error-message {
-    color: red;
+    color: #f44747; /* Red for errors */
     font-weight: bold;
     margin-top: 10px;
 }
 
 .success-message {
-    color: green;
+    color: #5cb85c; /* Green for success */
     font-weight: bold;
     margin-top: 10px;
 }
@@ -78,15 +67,15 @@ p {
 }
 
 .db-connection-status.success {
-    background-color: #e6ffe6;
-    color: green;
-    border: 1px solid #84d484;
+    background-color: #283b28; /* Dark green background */
+    color: #5cb85c; /* Green text */
+    border: 1px solid #4cae4c;
 }
 
 .db-connection-status.error {
-    background-color: #ffe6e6;
-    color: red;
-    border: 1px solid #ffb3b3;
+    background-color: #3b2828; /* Dark red background */
+    color: #f44747; /* Red text */
+    border: 1px solid #d43f3f;
 }
 
 .db-connection-status .icon {
@@ -100,14 +89,15 @@ p {
     max-width: 100%;
     margin: 10px auto;
     border-collapse: collapse;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Darker shadow */
+    background-color: #333333; /* Dark background for table */
     table-layout: auto;
+    color: #d4d4d4; /* Light text color */
 }
 
 .results-table th,
 .results-table td {
-    border: 1px solid #ddd;
+    border: 1px solid #555555; /* Darker border */
     padding: 8px 12px;
     text-align: left;
     font-size: 0.9em;
@@ -116,41 +106,59 @@ p {
 }
 
 .results-table th {
-    background-color: #f0f0f0;
+    background-color: #444444; /* Slightly lighter dark background for header */
     font-weight: bold;
-    color: #555;
+    color: #d4d4d4; /* Light text color */
 }
 
 .results-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #3a3a3a; /* Slightly darker background for even rows */
 }
 
 .results-table tbody tr:hover {
-    background-color: #eee;
+    background-color: #424242; /* Hover effect */
 }
 
 .results {
     text-align: center;
     margin: 0;
     padding: 5px;
+    color: #d4d4d4; /* Light text color */
 }
 
 .results h2 {
     margin: 0;
     padding: 5px;
+    color: #d4d4d4; /* Light text color */
 }
 
 .results p {
     margin: 0;
     padding: 5px;
+    color: #d4d4d4; /* Light text color */
+}
+
+main h2 {
+    margin:auto;
+    text-align: center;
+    border-top: 1px solid #5e5e5e;
+    border-bottom: 1px solid #5e5e5e;
+    padding: 5px 0; /* Spazio sopra e sotto il testo */
+    background: linear-gradient(to right, #377eb8, #4daf4a); /* Visual Studio like blue-green gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px black;
+    display: inline-block; /* Necessario per background-clip: text */ /* Un gradiente dal blu al verde */
+    font-size: 3em; /* Aumenta la dimensione del testo (puoi provare valori diversi) */
 }
 
 /* Stili per il form con layout a griglia (2 colonne) */
 form {
-    background-color: #f8f8f8;
+    background-color: #2a2a2a; /* Dark background for form */
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5); /* Darker shadow */
     width: 90%;
     max-width: 800px;
     margin: 4px auto;
@@ -159,13 +167,14 @@ form {
     grid-template-rows: 1fr 1fr auto;
     gap: 10px;
     align-items: center; /* Allinea gli elementi verticalmente al centro della cella */
+    color: #d4d4d4; /* Light text color */
 }
 
 form > div > label {
     display: block;
     text-align: center;
     font-weight: bold;
-    color: #333;
+    color: #d4d4d4; /* Light text color */
     grid-column: 1; /* La label nella prima colonna */
 }
 
@@ -173,7 +182,7 @@ form > div > input,
 form > div > select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #5e5e5e; /* Darker border */
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
@@ -183,6 +192,8 @@ form > div > select {
     appearance: none; /* Opzionale per il select */
     -webkit-appearance: none;
     -moz-appearance: none;
+    background-color: #333333; /* Dark background for input fields */
+    color: #d4d4d4; /* Light text color */
     background-image: url('data:image/svg+xml;utf8,<svg fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>'); /* Opzionale per il select */
     background-repeat: no-repeat;
     background-position: right 10px center;
@@ -197,7 +208,7 @@ form > div > select {
 }
 
 form > div > select:hover {
-    border-color: #007bff;
+    border-color: #377eb8; /* Blue accent color */
 }
 
 form > div > select::-ms-expand {
@@ -206,7 +217,7 @@ form > div > select::-ms-expand {
 
 form > div > small {
     display: block;
-    color: #777;
+    color: #9cdcfe; /* Light blue for small text */
     margin-top: 3px;
     font-size: 0.8em;
     grid-column: 1 / span 2; /* Lo small occupa entrambe le colonne */
@@ -218,9 +229,9 @@ form > button[type="submit"] {
     grid-column: 1 / span 2; /* Il bottone occupa entrambe le colonne */
     text-align: center;
     background-color: transparent;
-    color: #007bff;
+    color: #377eb8; /* Blue accent color */
     padding: 12px 10px;
-    border: 2px solid #007bff;
+    border: 2px solid #377eb8; /* Blue accent border */
     border-radius: 6px;
     cursor: pointer;
     font-size: 1.1em;
@@ -228,14 +239,16 @@ form > button[type="submit"] {
 }
 
 form > button[type="submit"]:hover {
-    background-color: #007bff;
-    color: white;
+    background-color: #377eb8; /* Blue accent background */
+    color: #1e1e1e; /* Dark text on hover */
 }
 
 .small-option {
     font-size: 0.8em; /* Puoi regolare questo valore come preferisci */
     /* Potresti anche voler aggiungere altri stili, come un padding più piccolo */
     padding: 0.2em 0.5em;
+    background-color: #333333; /* Dark background for options */
+    color: #d4d4d4; /* Light text color for options */
 }
 
 .form-section {
@@ -246,9 +259,9 @@ form > button[type="submit"]:hover {
     align-items: start; /* Allinea gli elementi all'inizio (in alto) del contenitore */
     padding: 10px; /* Aggiunge un po' di spazio interno al contenitore (opzionale) */
     margin-bottom: 20px; /* Aggiunge un po' di spazio sotto la sezione (opzionale) */
-    background-color: #f5f7e3; /* Aggiunge un leggero sfondo (opzionale) */
+    background-color: #2a2a2a; /* Dark background for section */
     border-radius: 8px; /* Arrotonda gli angoli (opzionale) */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5); /* Darker shadow */
 }
 
 /* Stile opzionale per dare una larghezza uguale ai form all'interno della sezione */
@@ -280,8 +293,34 @@ form > button[type="submit"]:hover {
     text-align: center;
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #5e5e5e; /* Darker border */
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
+    background-color: #333333; /* Dark background for input fields */
+    color: #d4d4d4; /* Light text color */
+}
+
+form button.singlebutton {
+    width: 100%;
+    background-color: transparent;
+    color: #cc9541; /* Blue accent color */
+    border: 2px solid #cc9541; /* Blue accent border */
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    padding: 3px;
+}
+
+form button.singlebutton:hover {
+    background-color: #cc9541; /* Blue accent background */
+    color: #1e1e1e; /* Dark text on hover */
+}
+
+.singlebutton button {
+    padding: 2px 2px;
+    width: 100%;
 }
