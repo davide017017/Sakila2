@@ -23,15 +23,27 @@ main {
     box-sizing: border-box;
     padding: 20px;
     background-image: linear-gradient(to bottom, #e0f7f0, #6c8378); /* Gradiente lineare azzurro */
-    background-color: #e0f2f7; 
+    background-color: #e0f2f7;
     box-shadow: 0 30px 110px rgba(0, 0, 0, 0.8);
     text-align: center;
-
 }
 
 h1 {
     color: rgb(14, 31, 21);
     text-align: center;
+}
+
+main h2 {
+    margin: auto;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0; /* Spazio sopra e sotto il testo */
+    background: linear-gradient(to right, #266aa5, #107960);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block; /* Necessario per background-clip: text */ /* Un gradiente dal blu al verde */
 }
 
 h3 {
@@ -133,22 +145,6 @@ p {
     padding: 5px;
 }
 
-
-
-main h2 {
-    margin:auto;
-    text-align: center;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    padding: 5px 0; /* Spazio sopra e sotto il testo */
-    background: linear-gradient(to right, #266aa5, #107960);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block; /* Necessario per background-clip: text */ /* Un gradiente dal blu al verde */
-}
-
-
 /* Stili per il form con layout a griglia (2 colonne) */
 form {
     background-color: #f8f8f8;
@@ -173,7 +169,7 @@ form > div > label {
     grid-column: 1; /* La label nella prima colonna */
 }
 
-form > div > input[type="number"],
+form > div > input,
 form > div > select {
     width: 100%;
     padding: 10px;
@@ -183,7 +179,7 @@ form > div > select {
     font-size: 1em;
     grid-column: 2; /* Input e select nella seconda colonna */
     text-align: center;
-    padding-right: 10px; 
+    padding-right: 10px;
     appearance: none; /* Opzionale per il select */
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -195,6 +191,11 @@ form > div > select {
     transition: border-color 0.3s ease;
 }
 
+form > div > select {
+    font-size: 0.8em;
+    /* padding: 0.2em 0.5em; */
+}
+
 form > div > select:hover {
     border-color: #007bff;
 }
@@ -202,7 +203,6 @@ form > div > select:hover {
 form > div > select::-ms-expand {
     display: none;
 }
-
 
 form > div > small {
     display: block;
@@ -232,16 +232,16 @@ form > button[type="submit"]:hover {
     color: white;
 }
 
-
-
-
-
-
+.small-option {
+    font-size: 0.8em; /* Puoi regolare questo valore come preferisci */
+    /* Potresti anche voler aggiungere altri stili, come un padding più piccolo */
+    padding: 0.2em 0.5em;
+}
 
 .form-section {
     margin: 5px;
     display: grid; /* Abilita il layout a griglia per il contenitore */
-    grid-template-columns: 1fr 2fr; /* Crea due colonne di uguale larghezza */
+    grid-template-columns: 1fr 4fr; /* Crea due colonne di uguale larghezza */
     gap: 10px; /* Imposta lo spazio tra gli elementi della griglia (i form) */
     align-items: start; /* Allinea gli elementi all'inizio (in alto) del contenitore */
     padding: 10px; /* Aggiunge un po' di spazio interno al contenitore (opzionale) */
@@ -255,8 +255,6 @@ form > button[type="submit"]:hover {
 .form-section > * {
     flex: 1; /* Permette agli elementi di espandersi e occupare spazio uguale */
 }
-
-
 
 .sakila-form-grid {
     display: grid;
@@ -272,12 +270,13 @@ form > button[type="submit"]:hover {
 .grid-elimina {
     grid-column: 1 / span 2;
 }
+
 .grid-title-newfilm {
     grid-column: 1 / span 2;
-
     width: 100%;
 }
-.grid-title-newfilm input{
+
+.grid-title-newfilm input {
     text-align: center;
     width: 100%;
     padding: 10px;

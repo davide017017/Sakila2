@@ -1,4 +1,5 @@
 <?php
+// Configurazione del percorso delle sessioni
 $sessionPath = __DIR__ . '/../sessions';
 if (!is_dir($sessionPath)) {
     mkdir($sessionPath, 0777, true);
@@ -6,23 +7,26 @@ if (!is_dir($sessionPath)) {
 session_save_path($sessionPath);
 session_start();
 
+// Inclusione dell'autoloader di Composer (per caricare le librerie esterne)
 require __DIR__ . '/../vendor/autoload.php';
+
+// Inclusione del file di connessione al database
 require_once __DIR__ . '/../src/Database/DatabaseConnection.php';
 
+// Inclusione del file per la gestione della ricerca
 $searchResults = require __DIR__ . '/../src/Search/process_search.php';
 
 $message = '';
 
-// Verifica se c'è un messaggio nella sessione
+// Recupera il messaggio dalla sessione e lo rimuove
 if (isset($_SESSION['message'])) {
     $message = $_SESSION['message'];
-    unset($_SESSION['message']); // Rimuovi il messaggio dalla sessione
+    unset($_SESSION['message']);
 }
-// Verifica se il form è stato inviato e se è presente l'operation_type
+
+// Gestisci l'invio del form per operazioni di modifica (aggiunta, eliminazione)
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['operation_type'])) {
     include __DIR__ . '/../src/Search/process_edit.php';
-    // La variabile $message potrebbe essere sovrascritta da process_edit.php (anche se ora reindirizza)
-    // Potresti voler gestire la logica del messaggio in modo più centralizzato.
 }
 ?>
 
@@ -31,7 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['operation_type'])) {
 <head>
     <?php require_once __DIR__ . '/../includes/head.php'; ?>
     <link rel="stylesheet" href="/styles/style.css">
-
 </head>
 <body>
     <main>

@@ -39,18 +39,25 @@
             <form method="POST" action="">
                 <div class="grid-title-newfilm">
                     <label for="title">Titolo:</label>
-                    <input type="text" id="title" name="title" placeholder="Aggiungi un film...">
-                    <small>Inserisci il titolo del film.</small>
+                    <input type="text" id="title" name="title" placeholder="Titolo film...">
+                    <small>Campo titolo (VARCHAR(128)): <br> inserisci il titolo del film (obbligatorio, <strong>massimo 128 caratteri)</strong>.</small>
+                </div>
+                <div class="grid-title-newfilm">
+                    <label for="description">Descrizione:</label>
+                    <input type="text" id="description" name="description" placeholder="Descrivi il film...">
+                    <small>Campo descrizione opzionale (TEXT): <br>  se lo compili, inserisci una descrizione testuale del film.</small>
                 </div>
                 <div>
                     <label for="release_year">Anno di Rilascio:</label>
                     <input  type="number" id="release_year" name="release_year" placeholder="Anno di Rilascio">
-                    <small>Inserisci l'anno di rilascio (opzionale).</small>
+                    <small>Campo anno di rilascio opzionale (YEAR): <br>  se lo compili, inserisci un anno tra il <strong> 1901 e il 2155</strong>.</small>
                 </div>
                 <div>
                     <label for="rental_rate">Tariffa di Noleggio:</label>
                     <input type="number" id="rental_rate" name="rental_rate" placeholder="Tariffa di Noleggio" step="0.01">
-                    <small>Inserisci la tariffa di noleggio (opzionale).</small>
+                    <small>
+                        Campo tariffa opzionale (decimal(4,2)): <br>  se lo compili, usa un numero con massimo 4 cifre totali (es. 99.99).
+                    </small>
                 </div>
                 <input type="hidden" name="table" value="film">
                 <input type="hidden" name="operation_type" value="add">

@@ -1,126 +1,119 @@
 <?php
-// Includi il file di connessione
+
 require_once __DIR__ . '/../Database/DatabaseConnection.php';
 
-// Verifica se la connessione è stata stabilita correttamente
 if (!isset($db)) {
-    die("Errore: La variabile di connessione al database \$db non è disponibile.");
+    die("Errore: La connessione al database non è disponibile.");
 }
 
-// Verifica se ci sono stati errori di connessione segnalati nel file incluso
+// Verifica errori di connessione segnalati
 global $dbConnectionError;
 if ($dbConnectionError) {
     die($dbConnectionError);
 }
 
-// Dichiara la variabile globale $message (sarà popolata da index.php)
+// Dichiara e inizializza la variabile globale per i messaggi
 global $message;
-$message = ''; // Inizializza la variabile
+$message = '';
+
+// Funzione per impostare il messaggio di sessione e reindirizzare
+function setMessageAndRedirect(string $message, ?string $url) {
+    $_SESSION['message'] = $message;
+    header("Location: " . ($url ?? $_SERVER['PHP_SELF']));
+    exit();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $table = $_POST['table'] ?? '';
-    $operation_type = $_POST['operation_type'] ?? '';
+    $operationType = $_POST['operation_type'] ?? '';
 
-    if ($operation_type == 'add') {
+    if ($operationType == 'add') {
         if ($table == 'actor') {
-            $first_name = $_POST['first_name'] ?? '';
-            $last_name = $_POST['last_name'] ?? '';
+            $firstName = $_POST['first_name'] ?? '';
+            $lastName = $_POST['last_name'] ?? '';
 
-            if (!empty($first_name) && !empty($last_name)) {
+            if (!empty($firstName) && !empty($lastName)) {
                 $sql = "INSERT INTO actor (first_name, last_name, last_update) VALUES (:first_name, :last_name, NOW())";
                 $stmt = $db->prepare($sql);
-                $stmt->bindParam(':first_name', $first_name);
-                $stmt->bindParam(':last_name', $last_name);
+                $stmt->bindParam(':first_name', $firstName);
+                $stmt->bindParam(':last_name', $lastName);
 
                 if ($stmt->execute()) {
-                    $_SESSION['message'] = "Attore <strong>" . htmlspecialchars($first_name) . " " . htmlspecialchars($last_name) . "</strong> aggiunto con successo.";
-                    header("Location: " . $_SERVER['PHP_SELF']); // Reindirizza alla stessa pagina
-                    exit();
+                    setMessageAndRedirect("Attore <strong>" . htmlspecialchars($firstName) . " " . htmlspecialchars($lastName) . "</strong> aggiunto con successo.", null);
                 } else {
-                    $_SESSION['message'] = "Errore nell'aggiunta dell'attore <strong>" . htmlspecialchars($first_name) . " " . htmlspecialchars($last_name) . "</strong>: " . print_r($stmt->errorInfo(), true);
+                    setMessageAndRedirect("Errore nell'aggiunta dell'attore <strong>" . htmlspecialchars($firstName) . " " . htmlspecialchars($lastName) . "</strong>: " . print_r($stmt->errorInfo(), true), null);
                 }
             } else {
-                $_SESSION['message'] = "Nome e cognome dell'attore sono obbligatori.";
+                setMessageAndRedirect("Nome e cognome dell'attore sono obbligatori.", null);
             }
         } elseif ($table == 'film') {
             $title = $_POST['title'] ?? '';
-            $release_year = $_POST['release_year'] ?? null;
-            $rental_rate = $_POST['rental_rate'] ?? null;
+            $releaseYear = $_POST['release_year'] ?? null;
+            $rentalRate = $_POST['rental_rate'] ?? null;
+            $description = $_POST['description'] ?? null;
 
             if (!empty($title)) {
-                $sql = "INSERT INTO film (title, release_year, rental_rate, language_id, last_update) VALUES (:title, :release_year, :rental_rate, 1, NOW())";
-                $stmt = $db->prepare($sql);
+                $sql = "INSERT INTO film (title, release_year, rental_rate, language_id, description, last_update) VALUES (:title, :release_year, :rental_rate, 1, :description, NOW())";                $stmt = $db->prepare($sql);
                 $stmt->bindParam(':title', $title);
-                $stmt->bindParam(':release_year', $release_year);
-                $stmt->bindParam(':rental_rate', $rental_rate);
+                $stmt->bindParam(':release_year', $releaseYear);
+                $stmt->bindParam(':rental_rate', $rentalRate);
+                $stmt->bindParam(':description', $description);
 
                 if ($stmt->execute()) {
-                    $_SESSION['message'] = "Film <strong>" . htmlspecialchars($title) . "</strong> aggiunto con successo.";
-                    header("Location: " . $_SERVER['PHP_SELF']); // Reindirizza alla stessa pagina
-                    exit();
+                    setMessageAndRedirect("Film <strong>" . htmlspecialchars($title) . "</strong> aggiunto con successo.", null);
                 } else {
-                    $_SESSION['message'] = "Errore nell'aggiunta del film <strong>" . htmlspecialchars($title) . "</strong>: " . print_r($stmt->errorInfo(), true);
+                    setMessageAndRedirect("Errore nell'aggiunta del film <strong>" . htmlspecialchars($title) . "</strong>: " . print_r($stmt->errorInfo(), true ), null);
                 }
             } else {
-                $_SESSION['message'] = "Il titolo del film è obbligatorio.";
+                setMessageAndRedirect("Il titolo del film è obbligatorio.", null);
             }
         } else {
-            $_SESSION['message'] = "Tabella non valida per l'aggiunta.";
+            setMessageAndRedirect("Tabella non valida per l'aggiunta.", null);
         }
-    } elseif ($operation_type == 'delete') {
+    } elseif ($operationType == 'delete') {
         if ($table == 'actor') {
-            $actor_id = $_POST['actor_id'] ?? null;
-            if (!empty($actor_id) && is_numeric($actor_id)) {
+            $actorId = $_POST['actor_id'] ?? null;
+            if (!empty($actorId) && is_numeric($actorId)) {
                 $sql = "DELETE FROM actor WHERE actor_id = :actor_id";
                 $stmt = $db->prepare($sql);
-                $stmt->bindParam(':actor_id', $actor_id, PDO::PARAM_INT);
+                $stmt->bindParam(':actor_id', $actorId, PDO::PARAM_INT);
 
                 if ($stmt->execute()) {
                     if ($stmt->rowCount() > 0) {
-                        $_SESSION['message'] = "Attore con ID $actor_id eliminato con successo.";
-                        header("Location: " . $_SERVER['PHP_SELF']); // Reindirizza alla stessa pagina
-                        exit();
+                        setMessageAndRedirect("Attore con ID $actorId eliminato con successo.", null);
                     } else {
-                        $_SESSION['message'] = "Nessun attore trovato con ID $actor_id.";
-                        header("Location: " . $_SERVER['PHP_SELF']); // Reindirizza alla stessa pagina
-                        exit();
+                        setMessageAndRedirect("Nessun attore trovato con ID $actorId.", null);
                     }
                 } else {
-                    $_SESSION['message'] = "Errore nell'eliminazione dell'attore: " . print_r($stmt->errorInfo(), true);
+                    setMessageAndRedirect("Errore nell'eliminazione dell'attore: " . print_r($stmt->errorInfo(), true), null);
                 }
             } else {
-                $_SESSION['message'] = "ID attore non valido.";
+                setMessageAndRedirect("ID attore non valido.", null);
             }
         } elseif ($table == 'film') {
-            $film_id = $_POST['film_id'] ?? null;
-            if (!empty($film_id) && is_numeric($film_id)) {
+            $filmId = $_POST['film_id'] ?? null;
+            if (!empty($filmId) && is_numeric($filmId)) {
                 $sql = "DELETE FROM film WHERE film_id = :film_id";
                 $stmt = $db->prepare($sql);
-                $stmt->bindParam(':film_id', $film_id, PDO::PARAM_INT);
+                $stmt->bindParam(':film_id', $filmId, PDO::PARAM_INT);
 
                 if ($stmt->execute()) {
                     if ($stmt->rowCount() > 0) {
-                        $_SESSION['message'] = "Film con ID $film_id eliminato con successo.";
-                        header("Location: " . $_SERVER['PHP_SELF']); // Reindirizza alla stessa pagina
-                        exit();
+                        setMessageAndRedirect("Film con ID $filmId eliminato con successo.", null);
                     } else {
-                        $_SESSION['message'] = "Nessun film trovato con ID $film_id.";
-                        header("Location: " . $_SERVER['PHP_SELF']); // Reindirizza alla stessa pagina
-                        exit();
+                        setMessageAndRedirect("Nessun film trovato con ID $filmId.", null);
                     }
                 } else {
-                    $_SESSION['message'] = "Errore nell'eliminazione del film: " . print_r($stmt->errorInfo(), true);
+                    setMessageAndRedirect("Errore nell'eliminazione del film: " . print_r($stmt->errorInfo(), true ), null);
                 }
             } else {
-                $_SESSION['message'] = "ID film non valido.";
+                setMessageAndRedirect("ID film non valido.", null);
             }
         } else {
-            $_SESSION['message'] = "Tabella non valida per l'eliminazione.";
+            setMessageAndRedirect("Tabella non valida per l'eliminazione.", null);
         }
     } else {
-        $_SESSION['message'] = "Operazione non valida.";
-        header("Location: " . $_SERVER['PHP_SELF']); // Reindirizza alla stessa pagina
-        exit();
+        setMessageAndRedirect("Operazione non valida.", null);
     }
 }
 
