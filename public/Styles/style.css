@@ -11,6 +11,7 @@ body {
 }
 
 main {
+    margin-top: 10px;
     width: 90%;
     height: 90%;
     border: 2px solid #796e5d;
@@ -24,12 +25,17 @@ main {
     background-image: linear-gradient(to bottom, #e0f7f0, #6c8378); /* Gradiente lineare azzurro */
     background-color: #e0f2f7; 
     box-shadow: 0 30px 110px rgba(0, 0, 0, 0.8);
+    text-align: center;
 
 }
 
 h1 {
     color: rgb(14, 31, 21);
     text-align: center;
+}
+
+h3 {
+    margin: 0;
 }
 
 p {
@@ -127,40 +133,47 @@ p {
     padding: 5px;
 }
 
-/* Stili per il form con layout a griglia (4 colonne) */
+
+
+main h2 {
+    margin:auto;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0; /* Spazio sopra e sotto il testo */
+    background: linear-gradient(to right, #266aa5, #107960);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block; /* Necessario per background-clip: text */ /* Un gradiente dal blu al verde */
+}
+
+
+/* Stili per il form con layout a griglia (2 colonne) */
 form {
     background-color: #f8f8f8;
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     width: 90%;
     max-width: 800px;
-    margin: 20px auto;
+    margin: 4px auto;
     display: grid;
-    grid-template-columns: auto 1fr auto 1fr; /* Quattro colonne */
+    grid-template-columns: 1fr 1fr; /* Due colonne di uguale larghezza */
+    grid-template-rows: 1fr 1fr auto;
     gap: 10px;
-    align-items: start; /* Allinea gli elementi all'inizio della cella */
+    align-items: center; /* Allinea gli elementi verticalmente al centro della cella */
 }
 
 form > div > label {
     display: block;
-    text-align: right;
-    padding-right: 10px;
+    text-align: center;
     font-weight: bold;
     color: #333;
-    grid-column: 1;
+    grid-column: 1; /* La label nella prima colonna */
 }
 
-form > div > input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 1em;
-    grid-column: 4; /* Assicurati che questa colonna sia corretta per il tuo layout a 4 colonne */
-}
-
+form > div > input[type="number"],
 form > div > select {
     width: 100%;
     padding: 10px;
@@ -168,12 +181,13 @@ form > div > select {
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
-    grid-column: 2; /* Assicurati che questa colonna sia corretta per il tuo layout a 4 colonne */
-    padding-right: 30px; /* Questo si applicherà solo ai select */
-    appearance: none; /* Opzionale: per rimuovere la freccia predefinita e stilizzarla */
+    grid-column: 2; /* Input e select nella seconda colonna */
+    text-align: center;
+    padding-right: 10px; 
+    appearance: none; /* Opzionale per il select */
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>'); /* Opzionale: freccia personalizzata */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>'); /* Opzionale per il select */
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 1em;
@@ -185,67 +199,28 @@ form > div > select:hover {
     border-color: #007bff;
 }
 
-/* Stile per nascondere la freccia predefinita in IE */
 form > div > select::-ms-expand {
     display: none;
 }
 
-form > div:nth-child(3) > label { /* Label per "Numero di Risultati" */
-    grid-column: 3;
-}
-
-form > div:nth-child(3) > input#limit { /* Input per "Numero di Risultati" */
-    grid-column: 4;
-}
-
-form > div:nth-child(4) > label { /* Label per "Ordina i risultati" */
-    grid-column: 1;
-    grid-row: 2;
-}
-
-form > div:nth-child(4) > select#order_by { /* Select per "Ordina i risultati" */
-    grid-column: 2;
-    grid-row: 2;
-}
-
-form > div:nth-child(5) > label { /* Label per "Ordina per colonna" */
-    grid-column: 3;
-    grid-row: 2;
-}
-
-form > div:nth-child(5) > select#order_column { /* Select per "Ordina per colonna" */
-    grid-column: 4;
-    grid-row: 2;
-}
 
 form > div > small {
     display: block;
     color: #777;
     margin-top: 3px;
     font-size: 0.8em;
-    grid-column: 1 / span 2; /* Lo small occupa le prime due colonne del suo div */
-    text-align: left;
+    grid-column: 1 / span 2; /* Lo small occupa entrambe le colonne */
+    text-align: center;
     padding-left: 10px;
 }
 
-form > div:nth-child(3) > small { /* Small per "Numero di Risultati" */
-    grid-column: 3 / span 2; /* Occupa le ultime due colonne del suo div */
-}
-
-form > div:nth-child(4) > small, /* Small per "Ordina i risultati" */
-form > div:nth-child(5) > small { /* Small per "Ordina per colonna" */
-    grid-column: 1 / span 2; /* Occupano le prime due colonne della riga successiva */
-    grid-row: auto; /* Lascia che il browser gestisca la riga */
-}
-
 form > button[type="submit"] {
-    grid-column: 1 / span 4;
+    grid-column: 1 / span 2; /* Il bottone occupa entrambe le colonne */
     text-align: center;
-    margin-top: 20px;
-    background-color: transparent; /* Sfondo trasparente */
-    color: #007bff; /* Testo blu */
-    padding: 12px 20px;
-    border: 2px solid #007bff; /* Bordo blu */
+    background-color: transparent;
+    color: #007bff;
+    padding: 12px 10px;
+    border: 2px solid #007bff;
     border-radius: 6px;
     cursor: pointer;
     font-size: 1.1em;
@@ -253,6 +228,61 @@ form > button[type="submit"] {
 }
 
 form > button[type="submit"]:hover {
-    background-color: #007bff; /* Sfondo blu al passaggio del mouse */
-    color: white; /* Testo bianco al passaggio del mouse */
+    background-color: #007bff;
+    color: white;
+}
+
+
+
+
+
+
+
+.form-section {
+    margin: 5px;
+    display: grid; /* Abilita il layout a griglia per il contenitore */
+    grid-template-columns: 1fr 2fr; /* Crea due colonne di uguale larghezza */
+    gap: 10px; /* Imposta lo spazio tra gli elementi della griglia (i form) */
+    align-items: start; /* Allinea gli elementi all'inizio (in alto) del contenitore */
+    padding: 10px; /* Aggiunge un po' di spazio interno al contenitore (opzionale) */
+    margin-bottom: 20px; /* Aggiunge un po' di spazio sotto la sezione (opzionale) */
+    background-color: #f5f7e3; /* Aggiunge un leggero sfondo (opzionale) */
+    border-radius: 8px; /* Arrotonda gli angoli (opzionale) */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Stile opzionale per dare una larghezza uguale ai form all'interno della sezione */
+.form-section > * {
+    flex: 1; /* Permette agli elementi di espandersi e occupare spazio uguale */
+}
+
+
+
+.sakila-form-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Crea due colonne di larghezza automatica */
+    grid-gap: 5px; /* Aggiunge uno spazio di 20px tra gli elementi della griglia */
+    padding: 5px; /* Aggiunge un po' di padding intorno al contenitore */
+}
+
+.sakila-form-grid > div {
+    padding: 5px;
+}
+
+.grid-elimina {
+    grid-column: 1 / span 2;
+}
+.grid-title-newfilm {
+    grid-column: 1 / span 2;
+
+    width: 100%;
+}
+.grid-title-newfilm input{
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
 }
