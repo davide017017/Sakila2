@@ -6,7 +6,7 @@
 
 **Una semplice interfaccia web sviluppata in PHP per interagire con il database Sakila, permettendo la visualizzazione, l'aggiunta e l'eliminazione di dati dalle tabelle 'actor' e 'film'.**
 
-![Screenshot della Todo List App](public\sakila-2-screenshot.JPG)
+![Screenshot della Todo List App](public/sakila-2-screenshot.JPG)
 
 ## ✨ Panoramica
 
